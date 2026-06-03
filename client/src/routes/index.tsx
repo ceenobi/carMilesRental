@@ -61,8 +61,8 @@ const routes = [
           const { default: Component } = await import("@/routes/contact");
           return { Component };
         },
-        action: async ({ request }) =>
-          (await import("@/api/actions/contact")).contactUsApi({ request }),
+        action: async (args) =>
+          (await import("@/api/actions/contact")).contactUsApi(args),
       },
       {
         path: "about-us",
@@ -90,10 +90,8 @@ const routes = [
                 await import("@/routes/booking/payment");
               return { Component };
             },
-            action: async ({ request }) =>
-              (await import("@/api/actions/payment")).processBookingApi({
-                request,
-              }),
+            action: async (args) =>
+              (await import("@/api/actions/payment")).processBookingApi(args),
           },
           {
             path: "confirmation",
@@ -113,10 +111,8 @@ const routes = [
             await import("@/routes/verify-payment");
           return { Component };
         },
-        action: async ({ request }) =>
-          (await import("@/api/actions/payment")).verifyPaymentApi({
-            request,
-          }),
+        action: async (args) =>
+          (await import("@/api/actions/payment")).verifyPaymentApi(args),
       },
       {
         path: "account",
@@ -161,8 +157,8 @@ const routes = [
           const { default: Component } = await import("@/routes/auth/register");
           return { Component };
         },
-        action: async ({ request }) =>
-          (await import("../api/actions/auth")).registerUserApi({ request }),
+        action: async (args) =>
+          (await import("../api/actions/auth")).registerUserApi(args),
       },
       {
         path: "login",
@@ -170,8 +166,8 @@ const routes = [
           const { default: Component } = await import("@/routes/auth/login");
           return { Component };
         },
-        action: async ({ request }) =>
-          (await import("@/api/actions/auth")).loginUserApi({ request }),
+        action: async (args) =>
+          (await import("@/api/actions/auth")).loginUserApi(args),
       },
       {
         path: "forgot-password",
@@ -180,10 +176,8 @@ const routes = [
             await import("@/routes/auth/forgot-password");
           return { Component };
         },
-        action: async ({ request }) =>
-          (await import("@/api/actions/auth")).requestPasswordResetApi({
-            request,
-          }),
+        action: async (args) =>
+          (await import("@/api/actions/auth")).requestPasswordResetApi(args),
       },
       {
         path: "reset-password",
@@ -192,10 +186,8 @@ const routes = [
             await import("@/routes/auth/reset-password");
           return { Component };
         },
-        action: async ({ request }) =>
-          (await import("@/api/actions/auth")).resetPasswordApi({
-            request,
-          }),
+        action: async (args) =>
+          (await import("@/api/actions/auth")).resetPasswordApi(args),
       },
       {
         path: "verify-account",
@@ -204,8 +196,8 @@ const routes = [
             await import("@/routes/auth/verify-account");
           return { Component };
         },
-        action: async ({ request }) =>
-          (await import("@/api/actions/auth")).verifyEmailApi({ request }),
+        action: async (args) =>
+          (await import("@/api/actions/auth")).verifyEmailApi(args),
       },
     ],
   },
@@ -247,10 +239,8 @@ const routes = [
           return { Component };
         },
         loader: ({ request }) => getAllBookingsLoader(queryClient)(request),
-        action: async ({ request }) =>
-          (await import("@/api/actions/booking")).adminCreateBookingApi({
-            request,
-          }),
+        action: async (args) =>
+          (await import("@/api/actions/booking")).adminCreateBookingApi(args),
       },
       {
         path: "bookings/:bookingId",
@@ -263,17 +253,13 @@ const routes = [
           getABookingLoader(queryClient)({
             bookingId: params.bookingId as string,
           }),
-        action: async ({ request, params }) => {
+        action: async (args) => {
+          const { request, params } = args;
           const method = request.method;
           if (method === "POST") {
-            return (await import("@/api/actions/driver")).assignDriverApi({
-              request,
-            });
+            return (await import("@/api/actions/driver")).assignDriverApi(args);
           } else {
-            return (await import("@/api/actions/booking")).updateBookingApi({
-              request,
-              params: { bookingId: params.bookingId as string },
-            });
+            return (await import("@/api/actions/booking")).updateBookingApi(args);
           }
         },
       },
@@ -288,10 +274,8 @@ const routes = [
           (await import("@/api/loaders/drivers")).getAllDriversLoader(
             queryClient,
           )(request),
-        action: async ({ request }) =>
-          (await import("@/api/actions/driver")).registerDriverApi({
-            request,
-          }),
+        action: async (args) =>
+          (await import("@/api/actions/driver")).registerDriverApi(args),
       },
       {
         path: "customers",
@@ -316,10 +300,8 @@ const routes = [
           (await import("@/api/loaders/cars")).getCarsLoader(queryClient)(
             request,
           ),
-        action: async ({ request }) =>
-          (await import("@/api/actions/car")).createCarApi({
-            request,
-          }),
+        action: async (args) =>
+          (await import("@/api/actions/car")).createCarApi(args),
       },
     ],
   },

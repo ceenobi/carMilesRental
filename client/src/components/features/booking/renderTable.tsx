@@ -9,13 +9,17 @@ import { useCallback } from "react";
 import { Link } from "react-router";
 import { useSearchParams } from "react-router";
 
-export default function RenderTable({ resolvedBookings }) {
-  const { bookings, stats, meta } =
-    (resolvedBookings as {
-      bookings: bookingDataProps[];
-      stats: Record<string, number>;
-      meta: UsePaginateProps;
-    }) ?? {};
+export default function RenderTable({
+  resolvedBookings,
+}: {
+  resolvedBookings?: {
+    bookings: bookingDataProps[];
+    stats: Record<string, number>;
+    meta: UsePaginateProps;
+  } | undefined;
+}) {
+  const { bookings, stats, meta } = resolvedBookings ?? {};
+
 
   const [searchParams, setSearchParams] = useSearchParams();
   const status = (searchParams.get("status") as

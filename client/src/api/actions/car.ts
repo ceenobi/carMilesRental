@@ -1,11 +1,14 @@
 import axiosClient from "@/lib/axiosClient";
-import type {
-  carSchemaType,
+import {
+  carSchema,
+  type carSchemaType,
 } from "@/lib/schemaTypes";
 import { axiosError } from "@/lib/utils";
+import type { ActionFunctionArgs } from "react-router";
 
-export const createCarApi = async ({ request }) => {
-  const formDataObj = await request.json() as carSchemaType;
+export const createCarApi = async ({ request, params }: ActionFunctionArgs) => {
+  const data = await request.json();
+  const formDataObj = carSchema.parse(data);
   try {
     const res = await axiosClient.post("/cars/add", formDataObj);
     return res;
@@ -18,7 +21,8 @@ export const createCarApi = async ({ request }) => {
       status: 500,
       body: {
         success: false,
-        message: error.message || "An unexpected error occurred",
+        message:
+          error instanceof Error ? error.message : "An unexpected error occurred",
       },
     };
   }

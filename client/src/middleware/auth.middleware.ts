@@ -9,13 +9,18 @@ import { queryClient } from "@/lib/utils";
 
 export const userContext = createContext<UserSession | null>(null);
 
-export async function authenticatedMiddleware(
+type MiddlewareFunction = (
+  args: { context: Readonly<RouterContextProvider>; request: Request },
+  next: () => Promise<Response>
+) => Promise<Response>;
+
+export const authenticatedMiddleware: MiddlewareFunction = async (
   {
     context,
     request,
-  }: { context: Readonly<RouterContextProvider>; request: Request },
-  next: () => Promise<Response>,
-) {
+  },
+  next,
+) => {
   try {
     const session = await queryClient.fetchQuery(getSessionQuery());
 
@@ -33,12 +38,12 @@ export async function authenticatedMiddleware(
     return redirect(`/login?from=${encodeURIComponent(from)}`);
   }
   return await next();
-}
+};
 
-export async function guestMiddleware(
-  { request }: { context: Readonly<RouterContextProvider>; request: Request },
-  next: () => Promise<Response>,
-) {
+export const guestMiddleware: MiddlewareFunction = async (
+  { request },
+  next,
+) => {
   try {
     const session = await queryClient.fetchQuery(getSessionQuery());
 
@@ -51,4 +56,4 @@ export async function guestMiddleware(
     // User is not authenticated (401 or other error), allow access to auth routes
   }
   return await next();
-}
+};

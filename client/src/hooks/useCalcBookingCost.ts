@@ -16,7 +16,7 @@ export default function useCalcBookingCost({
 }) {
   const DRIVER_FEE_PER_DAY = 10000;
   if (!pickUpDate || !dropOffDate)
-    return { days: 0, rentalTotal: 0, grandTotal: 0 };
+    return { days: 0, rentalTotal: 0, grandTotal: 0, driverTotal: 0 };
 
   const pickup = new Date(pickUpDate);
   const dropoff = new Date(dropOffDate);
@@ -26,12 +26,12 @@ export default function useCalcBookingCost({
   // Check for past dates
   if (pickup < today) {
     toast.error("Pick-up date cannot be in the past", { id: "bookingDate" });
-    return { days: 0, rentalTotal: 0, grandTotal: 0 };
+    return { days: 0, rentalTotal: 0, grandTotal: 0, driverTotal: 0 };
   }
 
   // Ensure valid dates and dropoff is after pickup
   if (isNaN(pickup.getTime()) || isNaN(dropoff.getTime())) {
-    return { days: 0, rentalTotal: 0, grandTotal: 0 };
+    return { days: 0, rentalTotal: 0, grandTotal: 0, driverTotal: 0 };
   }
 
   const diffTime = dropoff.getTime() - pickup.getTime();

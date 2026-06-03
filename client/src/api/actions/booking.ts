@@ -1,13 +1,16 @@
 import axiosClient from "@/lib/axiosClient";
-import type {
-  adminNewBookingSchemaType,
-  bookingSchemaType,
+import {
+  bookingSchema,
+  adminNewBookingSchema,
+  type adminNewBookingSchemaType,
+  type bookingSchemaType,
 } from "@/lib/schemaTypes";
 import { axiosError } from "@/lib/utils";
+import type { ActionFunctionArgs } from "react-router";
 
-export const createBookingApi = async ({ request }) => {
+export const createBookingApi = async ({ request, params, context }: ActionFunctionArgs) => {
   const formData = await request.formData();
-  const formDataObj = Object.fromEntries(formData) as bookingSchemaType;
+  const formDataObj = bookingSchema.parse(Object.fromEntries(formData));
   try {
     const res = await axiosClient.post("/bookings/create", formDataObj);
     return res;
@@ -20,15 +23,16 @@ export const createBookingApi = async ({ request }) => {
       status: 500,
       body: {
         success: false,
-        message: error.message || "An unexpected error occurred",
+        message:
+          error instanceof Error ? error.message : "An unexpected error occurred",
       },
     };
   }
 };
 
-export const adminCreateBookingApi = async ({ request }) => {
+export const adminCreateBookingApi = async ({ request, params, context }: ActionFunctionArgs) => {
   const formData = await request.formData();
-  const formDataObj = Object.fromEntries(formData) as adminNewBookingSchemaType;
+  const formDataObj = adminNewBookingSchema.parse(Object.fromEntries(formData));
   try {
     const res = await axiosClient.post("/bookings/admin-create", formDataObj);
     return res;
@@ -41,14 +45,24 @@ export const adminCreateBookingApi = async ({ request }) => {
       status: 500,
       body: {
         success: false,
-        message: error.message || "An unexpected error occurred",
+        message:
+          error instanceof Error ? error.message : "An unexpected error occurred",
       },
     };
   }
 };
 
-export const updateBookingApi = async ({ request, params }) => {
+export const updateBookingApi = async ({ request, params, context }: ActionFunctionArgs) => {
   const bookingId = params.bookingId;
+  if (!bookingId) {
+    return {
+      status: 400,
+      body: {
+        success: false,
+        message: "Booking ID is missing",
+      },
+    };
+  }
   const url = new URL(request.url);
   const status = url.searchParams.get("status");
   const formData = await request.formData();
@@ -85,7 +99,8 @@ export const updateBookingApi = async ({ request, params }) => {
       status: 500,
       body: {
         success: false,
-        message: error.message || "An unexpected error occurred",
+        message:
+          error instanceof Error ? error.message : "An unexpected error occurred",
       },
     };
   }

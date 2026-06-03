@@ -85,9 +85,9 @@ export default function Summary({
           <Separator />
           <div className="flex justify-between items-center">
             <p className="text-SoftBlack">
-              {formatPrice(car?.price)} x {days} days
+              {formatPrice(car?.price)} x {days ?? 0} days
             </p>
-            <p className="text-MainBlack">{formatPrice(rentalTotal)}</p>
+            <p className="text-MainBlack">{formatPrice(rentalTotal ?? 0)}</p>
           </div>
           <div className="flex justify-between items-center">
             <p className="text-SoftBlack">Service fee</p>
@@ -97,14 +97,14 @@ export default function Summary({
             <div className="flex justify-between items-center">
               <p className="text-SoftBlack">Driver fee (10k/day)</p>
               <p className="text-MainBlack">
-                {formatPrice((days || 0) * 10000)}
+                {formatPrice((days ?? 0) * 10000)}
               </p>
             </div>
           )}
           <Separator />
           <div className="flex justify-between items-center text-lg">
             <p className="text-MainBlack">Total</p>
-            <p className="text-MainBlack">{formatPrice(grandTotal)}</p>
+            <p className="text-MainBlack">{formatPrice(grandTotal ?? 0)}</p>
           </div>
           <p className="text-xs text-SoftBlack/70">
             Free cancellation up to 24h before pickup
@@ -130,15 +130,15 @@ export default function Summary({
             <div className="mt-8">
               <h1 className="text-SoftBlack">TOTAL PAID</h1>
               <h1 className="my-4 text-MainBlack text-3xl">
-                {formatPrice(grandTotal)}
+                {formatPrice(grandTotal ?? 0)}
               </h1>
               <Separator />
               <div className="mt-8 space-y-4">
                 <div className="flex justify-between items-center">
                   <p className="text-SoftBlack">
-                    {formatPrice(car?.price)} x {days} days
+                    {formatPrice(car?.price)} x {days ?? 0} days
                   </p>
-                  <p className="text-MainBlack">{formatPrice(rentalTotal)}</p>
+                  <p className="text-MainBlack">{formatPrice(rentalTotal ?? 0)}</p>
                 </div>
                 <div className="flex justify-between items-center">
                   <p className="text-SoftBlack">Service fee</p>
@@ -150,7 +150,7 @@ export default function Summary({
                   <div className="flex justify-between items-center">
                     <p className="text-SoftBlack">Driver fee (10k/day)</p>
                     <p className="text-MainBlack">
-                      {formatPrice((days || 0) * 10000)}
+                      {formatPrice((days ?? 0) * 10000)}
                     </p>
                   </div>
                 )}

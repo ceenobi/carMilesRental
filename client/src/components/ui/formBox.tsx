@@ -20,7 +20,7 @@ type FormFieldProps<T extends FieldValues> = {
   type: string;
   id: string;
   register: UseFormRegister<T>;
-  errors?: RHFFieldError | undefined;
+  errors?: any;
   placeholder?: string;
   isVisible?: boolean;
   setIsVisible?: (visible: boolean | ((prev: boolean) => boolean)) => void;

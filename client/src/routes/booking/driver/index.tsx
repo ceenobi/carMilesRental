@@ -15,7 +15,7 @@ export default function Driver() {
     handleSubmit,
     formState: { errors },
   } = useForm<driverSchemaType>({
-    resolver: zodResolver(driverSchema),
+    resolver: zodResolver<driverSchemaType>(driverSchema),
     defaultValues: {
       fullname: driverData?.fullname || "",
       email: driverData?.email || "",

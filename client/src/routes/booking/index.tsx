@@ -42,7 +42,7 @@ export default function BookRide() {
     getValues,
     formState: { errors },
   } = useForm<bookingSchemaType>({
-    resolver: zodResolver(bookingSchema),
+    resolver: zodResolver<bookingSchemaType>(bookingSchema),
     defaultValues: {
       pickUpLocation: savedBooking?.pickUpLocation || "",
       dropOffLocation: savedBooking?.dropOffLocation || "",

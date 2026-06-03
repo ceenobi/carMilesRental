@@ -1,8 +1,9 @@
 import axiosClient from '@/lib/axiosClient'
 import type { uploadSchemaType } from '@/lib/schemaTypes'
 import { axiosError } from '@/lib/utils'
+import type { ActionFunctionArgs } from 'react-router'
 
-export const uploadApi = async ({ request }) => {
+export const uploadApi = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData()
   const formDataObj = Object.fromEntries(formData) as uploadSchemaType
   try {
@@ -17,13 +18,14 @@ export const uploadApi = async ({ request }) => {
       status: 500,
       body: {
         success: false,
-        message: error.message || 'An unexpected error occurred',
+        message:
+          error instanceof Error ? error.message : 'An unexpected error occurred',
       },
     }
   }
 }
 
-export const deleteMediaApi = async ({ request }) => {
+export const deleteMediaApi = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData()
   const formDataObj = Object.fromEntries(formData) as uploadSchemaType
   try {
@@ -38,7 +40,8 @@ export const deleteMediaApi = async ({ request }) => {
       status: 500,
       body: {
         success: false,
-        message: error.message || 'An unexpected error occurred',
+        message:
+          error instanceof Error ? error.message : 'An unexpected error occurred',
       },
     }
   }

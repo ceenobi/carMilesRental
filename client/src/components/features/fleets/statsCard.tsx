@@ -3,26 +3,26 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface StatsCardProps {
   stats: {
-    totalBooked: number;
-    totalOpen: number;
-    totalUnavailable: number;
-    totalReserved: number;
+    totalBooked?: number;
+    totalOpen?: number;
+    totalUnavailable?: number;
+    totalReserved?: number;
   };
 }
 
 const StatsCard: FC<StatsCardProps> = ({ stats }) => {
   const { totalBooked, totalOpen, totalUnavailable, totalReserved } = stats;
   const statsData = [
-    { label: "Booked", value: totalBooked, color: "text-emerald-500" },
-    { label: "Available", value: totalOpen, color: "text-rose-500" },
+    { label: "Booked", value: totalBooked ?? 0, color: "text-emerald-500" },
+    { label: "Available", value: totalOpen ?? 0, color: "text-rose-500" },
     {
       label: "Unavailable",
-      value: totalUnavailable,
+      value: totalUnavailable ?? 0,
       color: "text-green-500",
     },
     {
       label: "Reserved",
-      value: totalReserved,
+      value: totalReserved ?? 0,
       color: "text-MainBlack",
     },
   ];

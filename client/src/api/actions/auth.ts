@@ -1,17 +1,22 @@
-import type {
-  loginSchemaType,
-  registerSchemaType,
-  resendOtpSchemaType,
-  resetPasswordSchemaType,
-  verifyEmailSchemaType,
+import {
+  loginSchema,
+  registerSchema,
+  resendOtpSchema,
+  resetPasswordSchema,
+  verifyEmailSchema,
+  type loginSchemaType,
+  type registerSchemaType,
+  type resendOtpSchemaType,
+  type resetPasswordSchemaType,
+  type verifyEmailSchemaType,
 } from "@/lib/schemaTypes";
 import axiosClient from "../../lib/axiosClient";
 import { axiosError } from "@/lib/utils";
-import { data } from "react-router";
+import { data, type ActionFunctionArgs } from "react-router";
 
-export const registerUserApi = async ({ request }) => {
+export const registerUserApi = async ({ request, params }: ActionFunctionArgs) => {
   const formData = await request.formData();
-  const formDataObj = Object.fromEntries(formData) as registerSchemaType;
+  const formDataObj = registerSchema.parse(Object.fromEntries(formData));
   try {
     const res = await axiosClient.post("/auth/register", formDataObj);
     return res;
@@ -25,15 +30,16 @@ export const registerUserApi = async ({ request }) => {
       status: 500,
       body: {
         success: false,
-        message: error.message || "An unexpected error occurred",
+        message:
+          error instanceof Error ? error.message : "An unexpected error occurred",
       },
     };
   }
 };
 
-export const loginUserApi = async ({ request }) => {
+export const loginUserApi = async ({ request, params }: ActionFunctionArgs) => {
   const formData = await request.formData();
-  const formDataObj = Object.fromEntries(formData) as loginSchemaType;
+  const formDataObj = loginSchema.parse(Object.fromEntries(formData));
   try {
     const res = await axiosClient.post("/auth/login", formDataObj);
     const setCookieHeader = res.headers["set-cookie"];
@@ -53,17 +59,18 @@ export const loginUserApi = async ({ request }) => {
       status: 500,
       body: {
         success: false,
-        message: error.message || "An unexpected error occurred",
+        message:
+          error instanceof Error ? error.message : "An unexpected error occurred",
       },
     };
   }
 };
 
-export const verifyEmailApi = async ({ request }) => {
+export const verifyEmailApi = async ({ request, params }: ActionFunctionArgs) => {
   const url = new URL(request.url);
   const email = url.searchParams.get("email") || "";
   const formData = await request.formData();
-  const formDataObj = Object.fromEntries(formData) as verifyEmailSchemaType;
+  const formDataObj = verifyEmailSchema.parse(Object.fromEntries(formData));
   try {
     const res = await axiosClient.post(
       `/auth/verify-email?email=${email}`,
@@ -87,7 +94,8 @@ export const verifyEmailApi = async ({ request }) => {
       status: 500,
       body: {
         success: false,
-        message: error.message || "An unexpected error occurred",
+        message:
+          error instanceof Error ? error.message : "An unexpected error occurred",
       },
     };
   }
@@ -107,15 +115,16 @@ export const resendOtpApi = async (data: resendOtpSchemaType) => {
       status: 500,
       body: {
         success: false,
-        message: error.message || "An unexpected error occurred",
+        message:
+          error instanceof Error ? error.message : "An unexpected error occurred",
       },
     };
   }
 };
 
-export const requestPasswordResetApi = async ({ request }) => {
+export const requestPasswordResetApi = async ({ request, params }: ActionFunctionArgs) => {
   const formData = await request.formData();
-  const formDataObj = Object.fromEntries(formData) as resendOtpSchemaType;
+  const formDataObj = resendOtpSchema.parse(Object.fromEntries(formData));
   try {
     const res = await axiosClient.post(
       "/auth/request-password-reset",
@@ -132,17 +141,18 @@ export const requestPasswordResetApi = async ({ request }) => {
       status: 500,
       body: {
         success: false,
-        message: error.message || "An unexpected error occurred",
+        message:
+          error instanceof Error ? error.message : "An unexpected error occurred",
       },
     };
   }
 };
 
-export const resetPasswordApi = async ({ request }) => {
+export const resetPasswordApi = async ({ request, params }: ActionFunctionArgs) => {
   const url = new URL(request.url);
   const email = url.searchParams.get("email") || "";
   const formData = await request.formData();
-  const formDataObj = Object.fromEntries(formData) as resetPasswordSchemaType;
+  const formDataObj = resetPasswordSchema.parse(Object.fromEntries(formData));
   try {
     const res = await axiosClient.patch(
       `/auth/reset-password?email=${email}`,
@@ -159,7 +169,8 @@ export const resetPasswordApi = async ({ request }) => {
       status: 500,
       body: {
         success: false,
-        message: error.message || "An unexpected error occurred",
+        message:
+          error instanceof Error ? error.message : "An unexpected error occurred",
       },
     };
   }
@@ -187,7 +198,8 @@ export const logoutApi = async () => {
       status: 500,
       body: {
         success: false,
-        message: error.message || "An unexpected error occurred",
+        message:
+          error instanceof Error ? error.message : "An unexpected error occurred",
       },
     };
   }
