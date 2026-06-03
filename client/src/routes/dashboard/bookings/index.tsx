@@ -35,7 +35,7 @@ export default function DasboardBookings() {
           errorElement={<DataError />}
           children={(resolvedBookings) => (
             <RenderTable resolvedBookings={{
-              bookings: resolvedBookings?.data?.body || [],
+              bookings: (resolvedBookings?.data?.body || []).map(b => ({ ...b, driver: b.driver || { fullname: 'N/A' } })),
               stats: {},
               meta: resolvedBookings?.data?.meta || { totalPages: 1, hasMore: false, currentPage: 1 }
             }} />

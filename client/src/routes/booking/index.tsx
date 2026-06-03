@@ -54,7 +54,7 @@ export default function BookRide() {
         : "",
       pickUpTime: savedBooking?.pickUpTime || "",
       dropOffTime: savedBooking?.dropOffTime || "",
-      addDriver: savedBooking?.addDriver || false,
+      addDriver: savedBooking?.addDriver ?? false,
       carId: car?._id || "",
     },
     mode: "onChange",

@@ -21,12 +21,15 @@ export default function Driver() {
       email: driverData?.email || "",
       phone: driverData?.phone || "",
       license: driverData?.license || "",
-      licenseExpiryDate: "",
-      language: [],
-      status: "available",
-      baseCity: "",
-      yearsOfExperience: "",
-      isVerified: false,
+      // licenseExpiryDate, language, status, baseCity, yearsOfExperience, isVerified 
+      // are required fields in driverSchema, so they must be provided if the schema expects them.
+      // The build error suggests they MUST be provided.
+      licenseExpiryDate: driverData?.licenseExpiryDate || "",
+      language: driverData?.language || [],
+      status: driverData?.status || "available",
+      baseCity: driverData?.baseCity || "",
+      yearsOfExperience: driverData?.yearsOfExperience || "",
+      isVerified: driverData?.isVerified ?? false,
     },
   });
   const navigate = useNavigate();
