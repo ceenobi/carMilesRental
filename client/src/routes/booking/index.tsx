@@ -42,7 +42,7 @@ export default function BookRide() {
     getValues,
     formState: { errors },
   } = useForm<bookingSchemaType>({
-    resolver: zodResolver<bookingSchemaType>(bookingSchema),
+    resolver: zodResolver(bookingSchema),
     defaultValues: {
       pickUpLocation: savedBooking?.pickUpLocation || "",
       dropOffLocation: savedBooking?.dropOffLocation || "",
@@ -56,10 +56,6 @@ export default function BookRide() {
       dropOffTime: savedBooking?.dropOffTime || "",
       addDriver: savedBooking?.addDriver || false,
       carId: car?._id || "",
-      // rentalDays: 0,
-      // serviceFee: car?.serviceFee || 0,
-      // rentalTotal: 0,
-      // grandTotal: 0,
     },
     mode: "onChange",
   });

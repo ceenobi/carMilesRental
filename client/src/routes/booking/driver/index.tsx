@@ -15,12 +15,18 @@ export default function Driver() {
     handleSubmit,
     formState: { errors },
   } = useForm<driverSchemaType>({
-    resolver: zodResolver<driverSchemaType>(driverSchema),
+    resolver: zodResolver(driverSchema),
     defaultValues: {
       fullname: driverData?.fullname || "",
       email: driverData?.email || "",
       phone: driverData?.phone || "",
       license: driverData?.license || "",
+      licenseExpiryDate: "",
+      language: [],
+      status: "available",
+      baseCity: "",
+      yearsOfExperience: "",
+      isVerified: false,
     },
   });
   const navigate = useNavigate();

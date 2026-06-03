@@ -3,7 +3,7 @@ import { lazy, Suspense } from "react";
 import { CarSkeletonGrid } from "@/components/ui/skeletonLoader";
 import Paginate from "@/components/ui/paginate";
 import usePaginate from "@/hooks/usePaginate";
-import type { BookingCardProps } from "@/lib/constants";
+import type { BookingCardRCProps } from "@/components/features/booking/bookingCard";
 
 const BookingCard = lazy(
   () => import("@/components/features/booking/bookingCard"),
@@ -52,7 +52,7 @@ export default function Bookings() {
                   {resolvedBookings?.length > 0 ? (
                     <>
                       <div className="grid grid-cols-1 gap-6 mb-6">
-                        {resolvedBookings?.map((booking: BookingCardProps) => (
+                        {resolvedBookings?.map((booking: BookingCardRCProps["booking"]) => (
                           <BookingCard key={booking._id} booking={booking} />
                         ))}
                       </div>
