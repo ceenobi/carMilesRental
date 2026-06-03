@@ -5,9 +5,9 @@ import { env } from "../config/keys.js";
 import {
   contactOwnerTemplate,
   contactUsTemplate,
-} from "src/email/templates.js";
-import { sendTsRestSuccess } from "src/lib/responseHandler.js";
-import logger from "src/config/logger.js";
+} from "../email/templates.js";
+import { sendTsRestSuccess } from "../lib/responseHandler.js";
+import logger from "../config/logger.js";
 
 export const sendContactMail = tryCatchWrapper(
   async (req: Request, res: Response) => {

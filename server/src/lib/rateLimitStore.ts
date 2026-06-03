@@ -1,4 +1,4 @@
-import { Store, Options, ClientRateLimitInfo } from "express-rate-limit";
+import { Store, ClientRateLimitInfo } from "express-rate-limit";
 
 interface PenaltyEntry {
   count: number;

@@ -1,9 +1,9 @@
 import crypto from "crypto";
-import { env } from "src/config/keys.js";
-import logger from "src/config/logger.js";
-import { getPaystack } from "src/config/paystack.js";
-import { IUser } from "src/models/user.js";
-import emailService from "src/email/send-email.js";
+import { env } from "../config/keys.js";
+import logger from "../config/logger.js";
+import { getPaystack } from "../config/paystack.js";
+import { IUser } from "../models/user.js";
+import emailService from "../email/send-email.js";
 
 export interface InitializePaymentData {
   amount: number;

@@ -2,8 +2,8 @@ import Driver from "../models/driver.js";
 import tryCatchWrapper from "../lib/tryCatchWrapper.js";
 import { sendTsRestError, sendTsRestSuccess } from "../lib/responseHandler.js";
 import { Request, Response } from "express";
-import Booking from "src/models/booking.js";
-import timeline from "src/models/timeline.js";
+import Booking from "../models/booking.js";
+import timeline from "../models/timeline.js";
 
 export const createDriver = tryCatchWrapper(
   async (req: Request, res: Response) => {

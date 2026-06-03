@@ -18,7 +18,7 @@
     "lib": ["ES2022"],
     "composite": true
   },
-  "include": ["src/index.ts", "src/**/*", "src/**/*.json"],
+  "include": ["api/index.ts", "src/index.ts", "src/**/*", "src/**/*.json"],
   "exclude": [
     "node_modules",
     "dist",

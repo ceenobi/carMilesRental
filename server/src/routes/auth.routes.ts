@@ -16,9 +16,9 @@ import {
   verifyEmailSchema,
   resendOtpSchema,
   resetPasswordSchema
-} from "src/lib/schemaValidation.js";
-import { strictLimiter } from "src/middleware/rateLimit.middleware.js";
-import { verifySession } from "src/middleware/auth.middleware.js";
+} from "../lib/schemaValidation.js";
+import { strictLimiter } from "../middleware/rateLimit.middleware.js";
+import { verifySession } from "../middleware/auth.middleware.js";
 
 const router = Router();
 

@@ -3,7 +3,7 @@ import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
 import morgan from "morgan";
 import { connectDB, gracefulShutdown } from "./config/database.js";
-import logger, { logError } from "src/config/logger.js";
+import logger, { logError } from "./config/logger.js";
 import {
   setupGlobalErrorHandlers,
   createExpressLogger,

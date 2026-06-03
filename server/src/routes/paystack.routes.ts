@@ -3,14 +3,14 @@ import {
   initializePaymentData,
   verifyPaymentData,
   webhookData,
-} from "src/controllers/paystack.controller.js";
+} from "../controllers/paystack.controller.js";
 import {
   initializePaystackSchema,
   verifyPaymentSchema,
-} from "src/lib/schemaValidation.js";
-import { verifySession } from "src/middleware/auth.middleware.js";
-import { validateFormData } from "src/middleware/formValidate.js";
-import { customRateLimiter } from "src/middleware/rateLimit.middleware.js";
+} from "../lib/schemaValidation.js";
+import { verifySession } from "../middleware/auth.middleware.js";
+import { validateFormData } from "../middleware/formValidate.js";
+import { customRateLimiter } from "../middleware/rateLimit.middleware.js";
 
 const router = Router();
 
