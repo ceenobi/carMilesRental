@@ -8,6 +8,7 @@ import DataError from "@/components/error/dataError";
 import Filter from "@/components/features/booking/filter";
 import type { BookingCardRCProps } from "@/components/features/booking/bookingCard";
 import type { UsePaginateProps } from "@/hooks/usePaginate";
+import type { bookingDataProps } from "@/types";
 
 export default function DasboardBookings() {
   const { bookings } = useLoaderData<{ bookings: Promise<{ data: { body: BookingCardRCProps["booking"][], meta: UsePaginateProps } }> }>();
@@ -35,7 +36,7 @@ export default function DasboardBookings() {
           errorElement={<DataError />}
           children={(resolvedBookings) => (
             <RenderTable resolvedBookings={{
-              bookings: (resolvedBookings?.data?.body || []).map(b => ({ ...b, driver: b.driver || { fullname: 'N/A' } })),
+              bookings: (resolvedBookings?.data?.body || []).map(b => ({ ...b, driverId: b.driverId || { fullname: 'N/A' } } as bookingDataProps)),
               stats: {},
               meta: resolvedBookings?.data?.meta || { totalPages: 1, hasMore: false, currentPage: 1 }
             }} />

@@ -9,7 +9,7 @@ export interface bookingDataProps {
   pickUpTime: string;
   dropOffDate: string;
   dropOffTime: string;
-  addDriver: boolean;
+  addDriver?: boolean;
   rentalTotal: number;
   rentalDays: number;
   serviceFee: number;
@@ -28,7 +28,7 @@ export interface bookingDataProps {
   userId: {
     fullname: string;
   };
-  driver: {
+  driverId?: {
     fullname: string;
   };
 }

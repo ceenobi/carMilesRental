@@ -186,9 +186,7 @@ export const bookingSchema = z.object({
     .min(3, {
       message: "Drop off time must be at least 3 characters long",
     }),
-  addDriver: z
-    .preprocess((val) => val === "true" || val === true, z.boolean())
-    .optional(),
+  addDriver: z.boolean().optional(),
 });
 
 export const initializePaystackSchema = z.object({
@@ -239,7 +237,7 @@ export const driverSchema = z.object({
   status: z.enum(["active", "inactive", "available", "off-duty", "booked"]),
   baseCity: z.string({ message: "Base city is required" }),
   yearsOfExperience: z.string({ message: "Years of experience is required" }),
-  isVerified: z.boolean({ message: "Driver verified status is required" }).default(false),
+  isVerified: z.boolean({ message: "Driver verified status is required" }).optional(),
 });
 
 export const carSchema = z.object({

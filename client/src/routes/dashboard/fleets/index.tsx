@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+import { Await, useLoaderData } from "react-router";
 import DataError from "@/components/error/dataError";
 import AddFleet from "@/components/features/fleets/addFleet";
 import RenderTable from "@/components/features/fleets/renderTable";
@@ -5,8 +7,6 @@ import StatsCard from "@/components/features/fleets/statsCard";
 import { SkeletonTable } from "@/components/ui/skeletonLoader";
 import type { UsePaginateProps } from "@/hooks/usePaginate";
 import type { CarProduct } from "@/lib/constants";
-import { Suspense } from "react";
-import { Await, useLoaderData } from "react-router";
 
 interface StatsCardProps {
     totalBooked: number;
