@@ -31,7 +31,7 @@ export const createSessionMiddleware = () => {
       maxAge: SESSION_MAX_AGE,
       httpOnly: true, // Prevent XSS attacks
       secure: env.NODE_ENV === "production", // HTTPS only in production
-      sameSite: "lax", // CSRF protection
+      sameSite: env.NODE_ENV === "production" ? "none" : "lax", // CSRF protection (None required for cross-site cookies)
     },
     rolling: true, // Refresh expiration on every response
   });
