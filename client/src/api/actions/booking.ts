@@ -2,13 +2,11 @@ import axiosClient from "@/lib/axiosClient";
 import {
   bookingSchema,
   adminNewBookingSchema,
-  type adminNewBookingSchemaType,
-  type bookingSchemaType,
 } from "@/lib/schemaTypes";
 import { axiosError } from "@/lib/utils";
 import type { ActionFunctionArgs } from "react-router";
 
-export const createBookingApi = async ({ request, params, context }: ActionFunctionArgs) => {
+export const createBookingApi = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
   const formDataObj = bookingSchema.parse(Object.fromEntries(formData));
   try {
@@ -30,7 +28,7 @@ export const createBookingApi = async ({ request, params, context }: ActionFunct
   }
 };
 
-export const adminCreateBookingApi = async ({ request, params, context }: ActionFunctionArgs) => {
+export const adminCreateBookingApi = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
   const formDataObj = adminNewBookingSchema.parse(Object.fromEntries(formData));
   try {
@@ -52,7 +50,7 @@ export const adminCreateBookingApi = async ({ request, params, context }: Action
   }
 };
 
-export const updateBookingApi = async ({ request, params, context }: ActionFunctionArgs) => {
+export const updateBookingApi = async ({ request, params }: ActionFunctionArgs) => {
   const bookingId = params.bookingId;
   if (!bookingId) {
     return {

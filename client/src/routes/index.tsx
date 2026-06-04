@@ -254,7 +254,7 @@ const routes = [
             bookingId: params.bookingId as string,
           }),
         action: async (args) => {
-          const { request, params } = args;
+          const { request } = args;
           const method = request.method;
           if (method === "POST") {
             return (await import("@/api/actions/driver")).assignDriverApi(args);

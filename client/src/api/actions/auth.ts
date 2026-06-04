@@ -4,17 +4,13 @@ import {
   resendOtpSchema,
   resetPasswordSchema,
   verifyEmailSchema,
-  type loginSchemaType,
-  type registerSchemaType,
   type resendOtpSchemaType,
-  type resetPasswordSchemaType,
-  type verifyEmailSchemaType,
 } from "@/lib/schemaTypes";
 import axiosClient from "../../lib/axiosClient";
 import { axiosError } from "@/lib/utils";
 import { data, type ActionFunctionArgs } from "react-router";
 
-export const registerUserApi = async ({ request, params }: ActionFunctionArgs) => {
+export const registerUserApi = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
   const formDataObj = registerSchema.parse(Object.fromEntries(formData));
   try {
@@ -37,7 +33,7 @@ export const registerUserApi = async ({ request, params }: ActionFunctionArgs) =
   }
 };
 
-export const loginUserApi = async ({ request, params }: ActionFunctionArgs) => {
+export const loginUserApi = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
   const formDataObj = loginSchema.parse(Object.fromEntries(formData));
   try {
@@ -66,7 +62,7 @@ export const loginUserApi = async ({ request, params }: ActionFunctionArgs) => {
   }
 };
 
-export const verifyEmailApi = async ({ request, params }: ActionFunctionArgs) => {
+export const verifyEmailApi = async ({ request }: ActionFunctionArgs) => {
   const url = new URL(request.url);
   const email = url.searchParams.get("email") || "";
   const formData = await request.formData();
@@ -122,7 +118,7 @@ export const resendOtpApi = async (data: resendOtpSchemaType) => {
   }
 };
 
-export const requestPasswordResetApi = async ({ request, params }: ActionFunctionArgs) => {
+export const requestPasswordResetApi = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
   const formDataObj = resendOtpSchema.parse(Object.fromEntries(formData));
   try {
@@ -148,7 +144,7 @@ export const requestPasswordResetApi = async ({ request, params }: ActionFunctio
   }
 };
 
-export const resetPasswordApi = async ({ request, params }: ActionFunctionArgs) => {
+export const resetPasswordApi = async ({ request }: ActionFunctionArgs) => {
   const url = new URL(request.url);
   const email = url.searchParams.get("email") || "";
   const formData = await request.formData();
