@@ -56,7 +56,7 @@ export default function BookRide() {
       dropOffTime: savedBooking?.dropOffTime || "",
       addDriver: savedBooking?.addDriver ?? false,
       carId: car?._id || "",
-    },
+    } as bookingSchemaType,
     mode: "onChange",
   });
   const navigate = useNavigate();
