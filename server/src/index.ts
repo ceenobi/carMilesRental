@@ -12,10 +12,7 @@ import {
 } from "./middleware/error.middleware.js";
 import { createSessionMiddleware } from "./config/session.js";
 import { globalLimiter } from "./middleware/rateLimit.middleware.js";
-import {
-  startEmailRetryJob,
-  stopEmailRetryJob,
-} from "./jobs/emailRetry.js";
+import { startEmailRetryJob, stopEmailRetryJob } from "./jobs/emailRetry.js";
 import { startCleanupPendingBookingsJob } from "./jobs/cleanupPendingBookings.js";
 //routes import
 import authRoutes from "./routes/auth.routes.js";
@@ -27,7 +24,6 @@ import paystackRoutes from "./routes/paystack.routes.js";
 import driverRoutes from "./routes/driver.routes.js";
 import customerRoutes from "./routes/customer.routes.js";
 import dashboardRoutes from "./routes/dashboard.routes.js";
-
 
 declare global {
   namespace Express {
@@ -139,7 +135,6 @@ app.use("/api/v1/drivers", driverRoutes);
 app.use("/api/v1/customers", customerRoutes);
 app.use("/api/v1/dashboard", dashboardRoutes);
 
-
 // Handle 404
 app.use(notFoundRoutes);
 // Global error handler
@@ -215,6 +210,10 @@ const startServer = async (): Promise<void> => {
 
 if (!process.env.VERCEL) {
   startServer();
+} else {
+  connectDB().catch((err) => {
+    console.error("Serverless DB connection failed:", err);
+  });
 }
 
 export default app;

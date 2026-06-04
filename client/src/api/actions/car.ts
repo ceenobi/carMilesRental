@@ -1,12 +1,11 @@
 import axiosClient from "@/lib/axiosClient";
 import {
   carSchema,
-  type carSchemaType,
 } from "@/lib/schemaTypes";
 import { axiosError } from "@/lib/utils";
 import type { ActionFunctionArgs } from "react-router";
 
-export const createCarApi = async ({ request, params }: ActionFunctionArgs) => {
+export const createCarApi = async ({ request }: ActionFunctionArgs) => {
   const data = await request.json();
   const formDataObj = carSchema.parse(data);
   try {

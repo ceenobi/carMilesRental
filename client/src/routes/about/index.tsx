@@ -48,7 +48,7 @@ export default function AboutUs() {
                       Watch our story{" "}
                     </>
                   }
-                  classname="w-full sm:w-[180px] py-5 bg-SoftWhite text-MainBlack text-sm font-semibold hover:bg-SoftWhite/90 transition-all rounded-full"
+                  classname="w-full sm:w-45 py-5 bg-SoftWhite text-MainBlack text-sm font-semibold hover:bg-SoftWhite/90 transition-all rounded-full"
                 />
               </div>
             </div>
@@ -91,7 +91,7 @@ export default function AboutUs() {
             <span className="w-2 h-2 bg-DeepOrange rounded-full inline-block mr-2" />
             Our Story
           </p>
-          <h1 className="font-medium text-2xl md:text-[40px] text-MainBlack max-w-[500px]">
+          <h1 className="font-medium text-2xl md:text-[40px] text-MainBlack max-w-125">
             Built <span className="text-DeepOrange">by drivers</span>,{" "}
             engineered <span className="text-DeepOrange">for everyone</span>.
           </h1>
