@@ -76,7 +76,7 @@ export default function NewBooking() {
   const dropOffDate = useWatch({ control, name: "dropOffDate" });
   const addDriver = useWatch({ control, name: "addDriver" });
   const carId = useWatch({ control, name: "carId" });
-  const car = cars.find((car: CarProduct) => car._id === carId);
+  const car = cars?.find((car: CarProduct) => car._id === carId);
   const { days, rentalTotal, grandTotal, driverTotal } = useCalcBookingCost({
     pickUpDate,
     dropOffDate,
